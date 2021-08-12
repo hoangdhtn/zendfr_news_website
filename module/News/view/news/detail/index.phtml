@@ -1,0 +1,90 @@
+<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area text-center">
+                                <ol class="breadcrumb hidden-xs-down">
+                                    <li class="breadcrumb-item"><a href="<?= $this->url('trangchu', ['action' => 'index']) ?>">Trang chủ</a></li>
+                                    <li class="breadcrumb-item"><a href="#"><?php echo $this->datas->getTheLoai(); ?></a></li>
+                                    <li class="breadcrumb-item active"><?php echo $this->datas->getTieuDe(); ?></li>
+                                </ol>
+
+                                <span class="color-orange"><a href="tech-category-01.html" title=""><?php echo $this->datas->getTheLoai(); ?></a></span>
+
+                                <h3><?php echo $this->datas->getTieuDe(); ?></h3>
+
+                                <div class="blog-meta big-meta">
+                                    <small><a href="tech-single.html" title=""><?php echo $this->datas->getCreated_at(); ?></a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="single-post-media">
+                                <img src="upload/tech_menu_08.jpg" alt="" class="img-fluid">
+                            </div><!-- end media -->
+
+                            <div class="blog-content">  
+
+                                <img src="<?= $this->basePath('tintuc/upload/' . $datas->getHinh()) ?>" alt="" class="img-fluid img-fullwidth">
+
+                                <div class="pp">
+                                    <?php echo $this->datas->getNoiDung(); ?>
+                                </div><!-- end pp -->
+                            </div><!-- end content -->
+
+                            <div class="blog-title-area">
+                                <div class="tag-cloud-single">
+                                    <span>Từ khóa</span>
+                                    <small><a href="#" title=""><?php echo $this->datas->getTieuDeKhongDau(); ?></a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox prevnextpost clearfix">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="blog-list-widget">
+                                            <div class="list-group">
+                                                <a href="<?= $this->url('detail', ['action' => 'index' , 'id' => $this->datas->getId() - 1]) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                    <div class="w-100 justify-content-between text-right">
+                                                        <img src="<?= $this->basePath('tintuc/upload/' . 'left-arrow.png') ?>" alt="" class="img-fluid float-right">
+                                                        <h5 class="mb-1">Tin trước</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div><!-- end col -->
+
+                                    <div class="col-lg-6">
+                                        <div class="blog-list-widget">
+                                            <div class="list-group">
+                                                <a href="<?= $this->url('detail', ['action' => 'index' , 'id' => $this->datas->getId() + 1]) ?>" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                    <div class="w-100 justify-content-between">
+                                                        <img src="<?= $this->basePath('tintuc/upload/' . 'right-arrow.png') ?>" alt="" class="img-fluid float-left">
+                                                        <h5 class="mb-1">Tin tiếp theo</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end author-box -->
+
+
+                            <hr class="invis1">
+                        </div>
+                        

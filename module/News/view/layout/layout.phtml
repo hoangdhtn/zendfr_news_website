@@ -1,0 +1,293 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Tin tức')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('tintuc/css/version/tech.css'))
+            ->prependStylesheet($this->basePath('tintuc/css/bootstrap.css'))
+            ->prependStylesheet($this->basePath('tintuc/css/font-awesome.min.css'))
+            ->prependStylesheet($this->basePath('tintuc/css/colors.css'))
+            ->prependStylesheet($this->basePath('tintuc/css/responsive.css'))
+            ->prependStylesheet($this->basePath('tintuc/style.css'))
+            ->prependStylesheet('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900') 
+
+            
+        ?>
+
+        <!-- CSS only -->
+        <!-- Scripts -->
+        <?= $this->headScript() ?>
+    </head>
+    <body style="font-family: 'Nunito';">
+        
+        <div id="wrapper">
+        <header class="tech-header header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?= $this->url('home'); ?>"><img src="<?= $this->basePath('tintuc/images/version/tech-logo.png'); ?>" alt=""></a>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('home'); ?>">Trang chủ</a>
+                            </li>
+                            <li class="nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục</a>
+                                <ul class="dropdown-menu megamenu" aria-labelledby="dropdown01">
+                                    <li>
+                                        <div class="container">
+                                            <div class="mega-menu-content clearfix">
+                                                <div class="tab">
+                                                    <?php 
+                                                        $theloais = $this->theloaiHelper();
+                                                        foreach ($theloais as $theloai) {
+                                                            // code..
+                                                        ?>
+                                                        <a href="<?= $this->url('categorydetail' , ['action' => 'index', 'id' => $theloai['id']]); ?>">
+                                                            <button class="tablinks active" onclick="openCategory(event, 'cat01')"> <?php echo $theloai['TenTheLoai']; ?> </button>
+                                                        </a>
+                                                            
+                                                        <?php
+                                                        }
+
+                                                     ?>
+
+                                                    <!-- <button class="tablinks" onclick="openCategory(event, 'cat02')">Technology</button>
+                                                    <button class="tablinks" onclick="openCategory(event, 'cat03')">Social Media</button>
+                                                    <button class="tablinks" onclick="openCategory(event, 'cat04')">Car News</button>
+                                                    <button class="tablinks" onclick="openCategory(event, 'cat05')">Worldwide</button> -->
+                                                </div>
+
+                                                <div class="tab-details clearfix">
+                                                    <div id="cat01" class="tabcontent active">
+                                                        <div class="row">
+                                                            
+                                                        </div><!-- end row -->
+                                                    </div>
+                                                    
+                                                    
+                                        
+                                                </div><!-- end tab-details -->
+                                            </div><!-- end mega-menu-content -->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('categoryfeed') ?>">Tin hot <i class="fa fa-fire"></i></a>
+                            </li>                   
+                            <li class="nav-item">
+                                <a class="nav-link" href="tech-category-02.html">Videos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="tech-category-03.html">Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('help', ['action' => 'contact']) ?>">Liên hệ với chúng tôi</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mr-2">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('search') ?>"><button type="button" class="btn btn-outline-primary">Tìm kiếm</button></a>
+                            </li>
+                            <?php if($this->identity()){ ?>
+                            <?php if($this->identity()->role_id == 1){ ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href=""><button type="button" class="btn btn-outline-primary">ADMIN</button></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('admin_user', ['action' => 'index']); ?>"><button type="button" class="btn btn-outline-primary">Trang quản trị</button></a>
+                            </li>
+                            <?php } ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('settings', ['action' => 'index']); ?>"><button type="button" class="btn btn-outline-primary">Tùy chỉnh</button></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('logout') ?>"><button type="button" class="btn btn-outline-primary">Đăng xuất</button></a>
+                            </li>
+                            <?php } else {?>
+                                <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('signup') ?>"><button type="button" class="btn btn-outline-primary">Đăng kí</button></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('login') ?>"><button type="button" class="btn btn-outline-primary">Đăng nhập</button></a>
+                            </li>
+                            <?php } ?>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-rss"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-android"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-apple"></i></a> 
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div><!-- end container-fluid -->
+        </header><!-- end market-header -->
+        <!-- START SLIDE -->
+        <section class="section first-section">
+            <div class="container-fluid">
+                <div class="masonry-blog clearfix"> 
+                    <?php
+                        $data = $this->Banner();
+                       // print_r($data);
+                     ?>
+                    <div class="first-slot">
+                        <div class="masonry-box post-media">
+                             <img style="width: 788px; height: 443px" src="<?= $this->basePath('tintuc/upload/' . $data[0]['Hinh'] ) ?>" alt="" class="img-fluid">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="" title=""><?php echo $data[0]['TenTheLoai']; ?></a></span>
+                                        <h4><a href="<?= $this->url('detail', ['action' => 'index', 'id' => $data[0]['id']]) ?>" title=""><?php echo $data[0]['TieuDe']; ?></a></h4>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                            </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end first-side -->
+ 
+                    <div class="second-slot">
+                        <div class="masonry-box post-media">
+                             <img style="width: 788px; height: 443px" src="<?= $this->basePath('tintuc/upload/' . $data[1]['Hinh'] ) ?>" alt="" class="img-fluid">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="tech-category-01.html" title=""><?php echo $data[1]['TenTheLoai']; ?></a></span>
+                                        <h4><a href="<?= $this->url('detail', ['action' => 'index', 'id' => $data[1]['id']]) ?>" title=""><?php echo $data[1]['TieuDe']; ?></a></h4>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                             </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end second-side -->
+
+                    <div class="last-slot">
+                        <div class="masonry-box post-media">
+                             <img style="width: 394px; height: 443px" src="<?= $this->basePath('tintuc/upload/' . $data[2]['Hinh'] ) ?>" alt="" class="img-fluid">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="tech-category-01.html" title=""><?php echo $data[2]['TenTheLoai']; ?></a></span>
+                                        <h4><a href="<?= $this->url('detail', ['action' => 'index', 'id' => $data[2]['id']]) ?>" title=""><?php echo $data[2]['TieuDe']; ?></a></h4>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                             </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end second-side -->
+                </div><!-- end masonry -->
+            </div>
+        </section>
+
+        <!-- END SLIDE -->
+        <!-- WHERTHER -->
+       
+        <!-- END WHERTHER -->
+        <section class="section">
+        <div class="container">
+            <div class="row">
+                 <div class="row">
+                                
+            <?= $this->content ?>
+        </div>
+        </section>
+            <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="widget">
+                            <div class="footer-text text-left">
+                                <a href="index.html"><img src="images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
+                                <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                                <div class="social">
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                </div>
+
+                                <hr class="invis">
+
+                                <div class="newsletter-widget text-left">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control" placeholder="Enter your email address">
+                                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                    </form>
+                                </div><!-- end newsletter -->
+                            </div><!-- end footer-text -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Danh mục phổ biến</h2>
+                            <?php
+                                $data = $this->footerHelper();
+                             ?>
+                            <div class="link-widget">
+                                <ul>    
+                                    <?php foreach($data as $value){ ?>
+                                    <li><a href="#"><?php echo $value['TenTheLoai']; ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div><!-- end link-widget -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                    
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Copyrights</h2>
+                            <div class="link-widget">
+                                <ul>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Advertising</a></li>
+                                    <li><a href="#">Write for us</a></li>
+                                    <li><a href="#">Trademark</a></li>
+                                    <li><a href="#">License & Help</a></li>
+                                </ul>
+                            </div><!-- end link-widget -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br>
+                        <div class="copyright">&copy; Tech Blog. Design: <a href="">Phạm Huy Hoàng</a>.</div>
+                    </div>
+                </div>
+            </div><!-- end container -->
+        </footer><!-- end footer -->
+
+        <div class="dmtop"></div>
+        
+    </div><!-- end wrapper -->
+        </div>
+        <?= $this->inlineScript()
+            ->prependFile($this->basePath('tintuc/js/custom.js'))
+            ->prependFile($this->basePath('tintuc/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('tintuc/js/tether.min.js'))
+            ->prependFile($this->basePath('tintuc/js/jquery.min.js'))
+            ->prependFile($this->basePath('tintuc/ckeditor/ckeditor.js'))
+             ?>
+             
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<?php 
+$title = "Danh sách bài đăng";
+$this->headTitle($title);
+ ?>
+ <h1>Danh sách bài đăng</h1>
+ <a href="<?= $this->url('admin_news', ['action' => 'add']) ?>">
+    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  Bài đăng mới
+</button>
+ </a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Ảnh</th>
+      <th scope="col">Tiêu đề</th>
+      <th scope="col">Thể loại</th>
+      <th scope="col">Ngày sửa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+        foreach ($news as $new) {
+     ?>
+    <tr>
+    	<td><?= $new->getId(); ?></td>
+    	<td>
+    		<img style="width: 70px; height: 70px;" src="<?= $this->basePath('tintuc/upload/' . $new->getHinh()) ?>">
+    	</td>     
+      <td><?= $new->getTieuDe(); ?></td>
+      <td><?= $new->getTheLoai(); ?></td>
+      <td><?= $new->getUpdated_at(); ?></td>
+      		<td>
+				<a href="<?= $this->url('admin_news', ['action' => 'edit', 'id' => $new->getId()]); ?>">
+				
+				<button type="button" class="btn btn-outline-primary">Sửa</button>
+			</a>
+
+		</td>
+		<td>
+				<a href="<?= $this->url('admin_news', ['action' => 'delete', 'id' => $new->getId()]); ?>">
+				
+				<button type="button" class="btn btn-outline-danger">Xóa</button>
+			</a>
+
+		</td>
+    </tr>
+    <?php   } ?>
+  </tbody>
+  
+</table>
+
+					<?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->news,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'admin_news']
+                                  ) ?>

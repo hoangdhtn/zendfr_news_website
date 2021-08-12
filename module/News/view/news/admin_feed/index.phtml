@@ -1,0 +1,55 @@
+<?php 
+$title = "Danh mục feed";
+$this->headTitle($title);
+ ?>
+ <h1>Danh sách RSS</h1>
+ <a href="<?= $this->url('admin_feed', ['action' => 'add']) ?>">
+    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  Thêm RSS
+</button>
+ </a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+        foreach ($datas as $new) {
+     ?>
+    <tr>
+    	<td><?= $new->getIdDanhMuc(); ?></td>   
+      <td><?= $new->getTenDanhMuc(); ?></td>
+      <td><?= $new->getLink(); ?></td>
+      		<td>
+				<a href="<?= $this->url('admin_feed', ['action' => 'edit', 'id' => $new->getIdDanhMuc()]); ?>">
+				
+				<button type="button" class="btn btn-outline-primary">Sửa</button>
+			</a>
+			<a href="<?= $this->url('admin_feed', ['action' => 'delete', 'id' => $new->getIdDanhMuc()]); ?>">
+				
+				<button type="button" class="btn btn-outline-danger">Xóa</button>
+			</a>
+
+		</td>
+
+    </tr>
+    <?php   } ?>
+  </tbody>
+  
+</table>
+
+					<?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->datas,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'admin_feed']
+                                  ) ?>

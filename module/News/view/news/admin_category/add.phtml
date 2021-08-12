@@ -1,0 +1,49 @@
+<?php
+
+$title = $this->translate('Thêm thể loại');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Thêm thể loại');
+#meta description
+$this->headMeta()->appendName('description', 'Thêm thể loại');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('admin_category', ['action' => 'add']));
+$form->prepare();
+
+?>			
+			<form enctype="multipart/form-data" method="POST">
+			<h3 class="mb-3 pt-2 text-md-center">
+				<?= $this->translate($title); ?>
+			</h3>
+
+			<?= $this->form()->openTag($form); ?>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('theloai')) ?>
+				<div class="input-group">
+					<?= $this->formText($form->get('theloai')) ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('theloai')) ?>
+				</div>
+			</div>
+
+				<!-- submit and csrf fields -->
+			<div class="mb-3 float-right">
+                <?= $this->formHidden($form->get('csrf')); ?>
+                <div class="text-danger">
+                	<?= $this->formElementErrors($form->get('csrf')); ?>
+                </div>
+				
+                <?= $this->formSubmit($form->get('themtheloai')); ?>           
+			</div>	
+			</form>
+			<button onclick="javascript:history.back()" type="button" class="btn btn-primary">Quay lại</button>
+			<?= $this->form()->closeTag(); ?>
+			<?= $this->inlineScript()
+            ->prependFile($this->basePath('ckeditor/ckeditor.js'))
+
+             ?>

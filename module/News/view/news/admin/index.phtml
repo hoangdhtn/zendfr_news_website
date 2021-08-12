@@ -1,0 +1,48 @@
+<?php 
+$title = "Danh sách User";
+$this->headTitle($title);
+ ?>
+ <h1>Danh sách Users</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên tài khoản</th>
+      <th scope="col">Email</th>
+      <th scope="col">Giới tính</th>
+      <th scope="col">Chức vụ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+        foreach ($accounts as $account) {
+     ?>
+    <tr>
+      <td><?= $account->getId(); ?></td>
+      <td><?= $account->getUsername(); ?></td>
+      <td><?= $account->getEmail(); ?></td>
+      <td><?= $account->getGender(); ?></td>
+      <td><?= $account->getRole(); ?></td>
+		<td>
+				<a href="<?= $this->url('admin_user', ['action' => 'delete', 'id' => $account->getId()]); ?>">
+				
+				<button type="button" class="btn btn-outline-danger">Xóa</button>
+			</a>
+			</a>
+		</td>
+    </tr>
+    <?php   } ?>
+  </tbody>
+  
+</table>
+
+					<?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->accounts,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'admin_user']
+                                  ) ?>

@@ -1,0 +1,81 @@
+<?php
+
+$title = $this->translate('Cập nhật bài viết');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Cập nhập bài viết');
+#meta description
+$this->headMeta()->appendName('description', 'Change account password');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('admin_news', ['action' => 'edit', 'id' => $id ]));
+$form->prepare();
+
+?>			
+			<form enctype="multipart/form-data" method="POST">
+			<h3 class="mb-3 pt-2 text-md-center">
+				
+				<?= $this->translate($title); ?>
+			</h3>
+			
+			<?= $this->form()->openTag($form); ?>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('tieude_news')) ?>
+				<div class="input-group">
+					<?= $this->formText($form->get('tieude_news')) ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('tieude_news')) ?>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('tomtat_news')) ?>
+				<div class="input-group">
+					<?= $this->formTextArea($form->get('tomtat_news')) ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('tomtat_news')) ?>
+				</div>
+			</div>
+			
+			<p>Hình ảnh</p>
+    		<input type="file" id="myFile" name="file">
+
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('theloai')) ?>
+				<div class="input-group">
+					<?= $this->formSelect($form->get('theloai')) ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('theloai')) ?>
+				</div>
+			</div>
+
+			<?= $this->formLabel($form->get('noidung_news')) ?>
+				
+					<?= $this->formTextArea($form->get('noidung_news')) ?>
+			
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('noidung_news')) ?>
+				</div>
+
+				<!-- submit and csrf fields -->
+			<div class="mb-3 float-right">
+                <?= $this->formHidden($form->get('csrf')); ?>
+                <div class="text-danger">
+                	<?= $this->formElementErrors($form->get('csrf')); ?>
+                </div>
+				<button onclick="javascript:history.back()" type="button" class="btn btn-primary">Quay lại</button>
+                <?= $this->formSubmit($form->get('capnhat_news')); ?>           
+			</div>	
+			</form>
+			<?= $this->form()->closeTag(); ?>
+			<?= $this->inlineScript()
+            ->prependFile($this->basePath('ckeditor/ckeditor.js'))
+
+             ?>

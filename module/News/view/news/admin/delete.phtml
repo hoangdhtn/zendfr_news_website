@@ -1,0 +1,45 @@
+<?php
+
+$title = $this->translate('Deactivate Account');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Delete, Deactivate, Account');
+#meta description
+$this->headMeta()->appendName('description', 'Delete user account');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('admin_user', ['action' => 'delete', 'id' => $this->id]));
+$form->prepare();
+
+?>
+
+<div class="container">
+
+	<div class="row mb-3">
+
+		<div class="col-md-5 shadow-sm">
+
+			<?= $this->form()->openTag($form); ?>
+
+			<h4 class="pt-2 text-md-center">
+				<?= $this->translate('Bạn thật sự muốn xóa?'); ?>
+			</h4>
+
+			<hr>
+
+			<div class="mb-3 float-left">
+				<div class="input-group">
+					<?= $this->formSubmit($form->get('delete_account')->setValue('No')); ?>
+				</div>
+			</div>
+
+			<div class="mb-3 float-right">
+				<?= $this->formHidden($form->get('user_id')->setValue($this->id)); ?>
+				<?= $this->formSubmit($form->get('delete_account')->setValue('Yes')); ?>
+			</div>
+
+			<?= $this->form()->closeTag(); ?>
+		</div>
+</div>

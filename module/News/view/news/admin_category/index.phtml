@@ -1,0 +1,53 @@
+<?php 
+$title = "Danh mục thể loại";
+$this->headTitle($title);
+ ?>
+ <h1>Danh sách bài đăng</h1>
+ <a href="<?= $this->url('admin_category', ['action' => 'add']) ?>">
+    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  Thêm danh mục
+</button>
+ </a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Tên</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+        foreach ($theloais as $new) {
+     ?>
+    <tr>
+    	<td><?= $new->getId(); ?></td>   
+      <td><?= $new->getTenTheLoai(); ?></td>
+      		<td>
+				<a href="<?= $this->url('admin_category', ['action' => 'edit', 'id' => $new->getId()]); ?>">
+				
+				<button type="button" class="btn btn-outline-primary">Sửa</button>
+			</a>
+			<a href="<?= $this->url('admin_category', ['action' => 'delete', 'id' => $new->getId()]); ?>">
+				
+				<button type="button" class="btn btn-outline-danger">Xóa</button>
+			</a>
+
+		</td>
+
+    </tr>
+    <?php   } ?>
+  </tbody>
+  
+</table>
+
+					<?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->theloais,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'admin_category']
+                                  ) ?>

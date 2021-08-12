@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 shadow-sm">
+
+            <div class="list-group ">
+              <p class="list-group-item list-group-item-action active align-middle" aria-current="true">
+                Danh mục tin HOT
+              </p>
+              <?php foreach ($datas as  $value){ ?>
+              <a href="<?= $this->url('categoryfeed', ['action' => 'detail', 'id' => $value->getIdDanhMuc()]) ?>" class="list-group-item list-group-item-action"><?php echo $value->getTenDanhMuc(); ?></a>
+              <?php  } ?>
+              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+                            <div class="col-md-12">
+                                 <?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->datas,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'categoryfeed']
+                                  ) ?>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+</div> 

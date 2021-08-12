@@ -1,0 +1,139 @@
+
+<div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-top clearfix">
+                                <h4 class="pull-left">Bản tin <a href="#"><i class="fa fa-rss"></i></a></h4>
+                            </div><!-- end blog-top -->
+
+                            <div class="blog-list clearfix">
+                                <?php 
+                                    foreach ($datas as $tin) {
+
+                                 ?>
+                                <hr class="invis">
+
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="tech-single.html" title="">
+                                                <img src="<?= $this->basePath('tintuc/upload/' . $tin->getHinh()) ?>" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="<?= $this->url('detail', ['action' => 'index', 'id' => $tin->getId()]) ?>" title=""><?php echo $this->escapeHtml($tin->getTieuDe()); ?></a></h4>
+                                        <p><?php echo $tin->getTomTat(); ?></p>
+                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title=""><?php echo $this->escapeHtml($tin->getTheLoai()); ?></a></small>
+                                        <small><a href="tech-single.html" title=""><?php echo $this->escapeHtml($tin->getCreated_at()); ?></a></small>
+                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> <?php echo $this->escapeHtml($tin->getSoLuotXem()); ?></a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+
+                                <?php } ?>
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+
+                        <hr class="invis">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                 <?= $this->paginationControl(
+                                      // The paginator object:
+                                      $this->datas,
+                                      // The scrolling style:
+                                      'sliding',
+                                      // The partial to use to render the control:
+                                      'news/partial/paginator',
+                                      // The route to link to when a user clicks a control link:
+                                      ['route' => 'trangchu']
+                                  ) ?>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget">
+                                <h2 class="widget-title">Chứng khoán</h2>
+                                <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container">
+                              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                              {
+                              "colorTheme": "light",
+                              "dateRange": "12M",
+                              "exchange": "US",
+                              "showChart": true,
+                              "locale": "vi_VN",
+                              "largeChartUrl": "",
+                              "isTransparent": false,
+                              "showSymbolLogo": false,
+                              "width": "300",
+                              "height": "600",
+                              "plotLineColorGrowing": "rgba(33, 150, 243, 1)",
+                              "plotLineColorFalling": "rgba(33, 150, 243, 1)",
+                              "gridLineColor": "rgba(240, 243, 250, 1)",
+                              "scaleFontColor": "rgba(120, 123, 134, 1)",
+                              "belowLineFillColorGrowing": "rgba(33, 150, 243, 0.12)",
+                              "belowLineFillColorFalling": "rgba(33, 150, 243, 0.12)",
+                              "symbolActiveColor": "rgba(33, 150, 243, 0.12)"
+                            }
+                              </script>
+                            </div>
+                            <!-- TradingView Widget END -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Giá vàng</h2>
+                                <!-- Giá vàng BEGIN -->
+                            <iframe frameborder="0" width="300px" height="300x" src="https://webtygia.com/api/vang?bgheader=b53e3e&colorheader=ffffff&padding=5&fontsize=13&undefined"></iframe>
+                            <!-- Giá vàng END -->
+                            </div><!-- end widget -->
+                            <div class="widget">
+                                <h2 class="widget-title">Theo dõi chúng tôi</h2>
+
+                                <div class="row text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="#" class="social-button facebook-button">
+                                            <i class="fa fa-facebook"></i>
+                                            <p>27k</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="#" class="social-button twitter-button">
+                                            <i class="fa fa-twitter"></i>
+                                            <p>98k</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="#" class="social-button google-button">
+                                            <i class="fa fa-google-plus"></i>
+                                            <p>17k</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <a href="#" class="social-button youtube-button">
+                                            <i class="fa fa-youtube"></i>
+                                            <p>22k</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="upload/banner_03.jpg" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->

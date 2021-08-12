@@ -1,0 +1,76 @@
+<?php
+
+$title = $this->translate('Thay đổi tên người dùng');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Edit, Change, Account, Username');
+#meta description
+$this->headMeta()->appendName('description', 'Update account username');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('settings', ['action' => 'username']));
+$form->prepare();
+
+?>
+
+<div class="container">
+
+		<div class="row mb-3">
+		<div class="nav-scroller shadow-sm">
+			<nav class="navbar navbar-light bg-light">
+			  <form class="form-inline">
+			  	<a href="<?= $this->url('settings', ['action' => 'password']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi mật khẩu</button>
+				</a>
+				<a href="<?= $this->url('settings', ['action' => 'username']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi tên người dùng</button>
+				</a>
+			    <a href="<?= $this->url('settings', ['action' => 'delete']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Xóa tài khoản</button>
+				</a>
+			  </form>
+			</nav>
+		</div>
+	</div>
+		<div class="col-md-5 shadow-sm">
+
+			<h3 class="pt-2 text-md-center">
+				<?= $this->translate('Thay đổi tên người dùng'); ?>
+			</h3>
+
+			<?= $this->form()->openTag($form); ?>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('current_username')); ?>
+				<div class="input-group">
+					<?= $this->formText($form->get('current_username')->setValue($this->authHelper()->getUsername())); ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('current_username')); ?>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('new_username')); ?>
+				<div class="input-group">
+					<?= $this->formText($form->get('new_username')); ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('new_username')); ?>
+				</div>
+			</div>
+
+			<div class="mb-3 float-right">
+				<?= $this->formHidden($form->get('csrf')); ?>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('csrf')); ?>
+				</div>
+				<?= $this->formSubmit($form->get('change_username')); ?>
+			</div>
+
+			<?= $this->form()->closeTag(); ?>
+
+
+</div>

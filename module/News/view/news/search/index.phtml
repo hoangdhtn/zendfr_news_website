@@ -1,0 +1,92 @@
+<?php
+
+$title = $this->translate('Tìm kiếm');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Tìm kiếm');
+#meta description
+$this->headMeta()->appendName('description', 'Change account password');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('search', ['action' => 'index']));
+$form->prepare();
+
+?>			
+			<form enctype="multipart/form-data" method="POST">
+			<h3 class="mb-3 pt-2 text-md-center">
+				<?= $this->translate($title); ?>
+			</h3>
+
+			<?= $this->form()->openTag($form); ?>
+
+			<div class="mb-3">
+				<?= $this->formLabel($form->get('search')) ?>
+				<div class="input-group">
+					<?= $this->formText($form->get('search')) ?>
+				</div>
+				<div class="text-danger">
+					<?= $this->formElementErrors($form->get('search')) ?>
+				</div>
+			</div>
+
+				<!-- submit and csrf fields -->
+			<div class="mb-3 float-right">
+                <?= $this->formHidden($form->get('csrf')); ?>
+                <div class="text-danger">
+                	<?= $this->formElementErrors($form->get('csrf')); ?>
+                </div>
+                <?= $this->formSubmit($form->get('tim')); ?>           
+			</div>	
+			</form>
+			
+			<?= $this->form()->closeTag(); ?>
+
+			<?php 
+				if(is_null($dd) != 1)
+				{  
+			?>
+
+					<div class="blog-list clearfix">
+                                <?php 
+                                    foreach ($dd as $tin) {
+
+                                 ?>
+                                <hr class="invis">
+
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="tech-single.html" title="">
+                                                <img src="<?= $this->basePath('tintuc/upload/' . $tin['Hinh']); ?>" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="<?= $this->url('detail', ['action' => 'index', 'id' => $tin['id']]) ?>" title=""><?php echo $this->escapeHtml($tin['TieuDe']); ?></a></h4>
+                                        <p><?php echo $tin['TomTat']; ?></p>
+                              
+                                        <small><a href="tech-single.html" title=""><?php echo $this->escapeHtml($tin['created_at']); ?></a></small>
+                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> <?php echo $this->escapeHtml($tin['SoLuotXem']); ?></a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+
+                                <?php } ?>
+                            </div><!-- end blog-list -->
+					
+			<?php	}else{
+				//echo $dd;
+			}
+
+
+			 ?>
+
+
+			<?= $this->inlineScript()
+            ->prependFile($this->basePath('ckeditor/ckeditor.js'))
+            ->prependFile($this->basePath('js/app.js'))
+
+             ?>

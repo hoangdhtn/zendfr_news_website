@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row mb-3">
+		<div class="nav-scroller shadow-sm">
+			<nav class="navbar navbar-light bg-light">
+			  <form class="form-inline">
+			  	<a href="<?= $this->url('settings', ['action' => 'password']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi mật khẩu</button>
+				</a>
+				<a href="<?= $this->url('settings', ['action' => 'username']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi tên người dùng</button>
+				</a>
+			    <a href="<?= $this->url('settings', ['action' => 'delete']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Xóa tài khoản</button>
+				</a>
+			  </form>
+			</nav>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+<?php
+
+$title = $this->translate('Xóa bài đăng');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Delete, Deactivate, Account');
+#meta description
+$this->headMeta()->appendName('description', 'Xóa tài khoản người dùng');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('admin_news', ['action' => 'delete', 'id' => $id]));
+$form->prepare();
+
+?>
+
+
+		<div class="col-md-5 shadow-sm">
+
+			<?= $this->form()->openTag($form); ?>
+
+			<h4 class="pt-2 text-md-center">
+				<?= $this->translate('Bạn chắc chắn muốn xóa bài viết?'); ?>
+			</h4>
+
+			<hr>
+
+			<div class="mb-3 float-left">
+				<div class="input-group">
+					<?= $this->formSubmit($form->get('delete_news')->setValue('No')); ?>
+				</div>
+			</div>
+
+			<div class="mb-3 float-right">
+				
+				<?= $this->formSubmit($form->get('delete_news')->setValue('Yes')); ?>
+			</div>
+
+			<?= $this->form()->closeTag(); ?>
+		</div>

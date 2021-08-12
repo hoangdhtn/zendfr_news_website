@@ -1,0 +1,46 @@
+
+                    
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-grid-system">
+                                <div class="row">
+                                	<?php foreach($channel as $value) { ?>
+                                    <div class="col-md-6">
+                                        <div class="blog-box">
+                                            <div class="blog-meta big-meta">
+                                                <h4><a href="tech-single.html" title=""><?php echo $value['title']; ?></p>
+                                                <small><a href="tech-single.html" title=""><?php echo date('Y-m-d H:i:s'); ?></a></small>
+                                                <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 2887</a></small>
+                                            </div><!-- end meta -->
+                                            <div class="post-media">
+                                                <?php echo $value['description']; ?>
+                                            </div>
+                                            <!-- end media -->
+                                            <a href="<?php echo $value['link']; ?>">
+                                            <button type="button" class="btn btn-outline-primary">Xem tiếp</button>
+                                            </a>
+                                        </div><!-- end blog-box -->
+                                    </div><!-- end col -->
+                               		<?php } ?>
+                                    
+                                </div><!-- end row -->
+                            </div><!-- end blog-grid-system -->
+                        </div><!-- end page-wrapper -->
+
+                        <hr class="invis3">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-start">
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div><!-- end col -->
+                        </div><!-- end row -->
+                    </div><!-- end col -->

@@ -1,0 +1,63 @@
+<?php
+
+$title = $this->translate('Xóa tài khoản');
+#meta keywords
+$this->headMeta()->appendName('keywords', 'Delete, Deactivate, Account');
+#meta description
+$this->headMeta()->appendName('description', 'Xóa tài khoản người dùng');
+#page title
+$this->headTitle($this->escapeHtml($title));
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('settings', ['action' => 'delete']));
+$form->prepare();
+
+?>
+
+<div class="container">
+
+	<div class="row mb-3">
+		<div class="nav-scroller shadow-sm">
+			<nav class="navbar navbar-light bg-light">
+			  <form class="form-inline">
+			  	<a href="<?= $this->url('settings', ['action' => 'password']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi mật khẩu</button>
+				</a>
+				<a href="<?= $this->url('settings', ['action' => 'username']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Thay đổi tên người dùng</button>
+				</a>
+			    <a href="<?= $this->url('settings', ['action' => 'deleta']); ?>" class="nav-link">
+					<button class="btn btn-outline-success" type="button">Xóa tài khoản</button>
+				</a>
+			  </form>
+			</nav>
+		</div>
+	</div>
+
+
+		<div class="col-md-5 shadow-sm">
+
+			<?= $this->form()->openTag($form); ?>
+
+			<h4 class="pt-2 text-md-center">
+				<?= $this->translate('Are you sure you want to do this?'); ?>
+			</h4>
+
+			<hr>
+
+			<div class="mb-3 float-left">
+				<div class="input-group">
+					<?= $this->formSubmit($form->get('delete_account')->setValue('No')); ?>
+				</div>
+			</div>
+
+			<div class="mb-3 float-right">
+				<?= $this->formHidden($form->get('user_id')->setValue($this->authHelper()->getId())); ?>
+				<?= $this->formSubmit($form->get('delete_account')->setValue('Yes')); ?>
+			</div>
+
+			<?= $this->form()->closeTag(); ?>
+		</div>
+
+</div>
